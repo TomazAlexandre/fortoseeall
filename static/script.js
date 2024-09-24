@@ -6,38 +6,35 @@ document.getElementById('uploadForm').addEventListener('submit', async function 
     formData.append("image", imageFile);
 
     // Substitua pela URL correta do backend no Heroku
-    const herokuBackendUrl = 'https://fortoseeall-a6f0c908bc1e.herokuapp.com/upload';
+    const herokuBackendUrl = 'https://fortoseeall-a6f0c908bc1e.herokuapp.com/upload';  // Substitua por sua URL
 
-    const response = await fetch(herokuBackendUrl, {
-        method: 'POST',
-        body: formData
-    });
-
-    const result = await response.json();
-    const responseText = result.description;
-
-    // Exibir a descrição no frontend
-    document.getElementById('response').innerText = responseText;
-    document.getElementById('result').style.display = 'block';
-
-    // Mostrar o botão para gerar o áudio
-    const generateAudioBtn = document.getElementById('generateAudioBtn');
-    generateAudioBtn.style.display = 'inline';
-    generateAudioBtn.onclick = async function () {
-        // Enviar a descrição ao backend para gerar o áudio
-        const audioResponse = await fetch('https://fortoseeall-a6f0c908bc1e.herokuapp.com/generate-audio', {
+    try {
+        const response = await fetch(herokuBackendUrl, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text: responseText })
+            body: formData
         });
 
-        // Criar URL para o áudio gerado e tocar no player
-        const audioBlob = await audioResponse.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const audioPlayer = document.getElementById('audioPlayer');
-        audioPlayer.src = audioUrl;
-        audioPlayer.style.display = 'block';
-    };
+        if (!response.ok) {
+            const errorData = await response.json();
+            alert(`Erro: ${errorData.error}`);
+            return;
+        }
+
+        const result = await response.json();
+        const responseText = result.description;
+
+        // Exibir a resposta no frontend
+        document.getElementById('response').innerText = responseText;
+        document.getElementById('result').style.display = 'block';
+
+        // Adicionar funcionalidade para converter o texto em áudio
+        document.getElementById('playAudio').onclick = function () {
+            const speech = new SpeechSynthesisUtterance(responseText);
+            speech.lang = 'pt-BR'; // Define o idioma para Português do Brasil
+            window.speechSynthesis.speak(speech);
+        };
+    } catch (error) {
+        console.error('Erro ao enviar a imagem:', error);
+        alert('Ocorreu um erro ao enviar a imagem. Tente novamente.');
+    }
 });
