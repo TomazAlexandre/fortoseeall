@@ -1,29 +1,32 @@
 
 # Para ver tudo
 
-Este projeto tem como objetivo criar uma plataforma acessível para pessoas cegas ou com baixa visão, utilizando a integração com o ChatGPT. Através do site, o usuário poderá enviar uma imagem, que será processada pela IA. O sistema, então, gera uma descrição detalhada de todos os elementos visíveis na imagem, analisando cores, formas, contextos e objetos presentes na cena.
+Este projeto visa desenvolver uma plataforma inovadora, integrada ao ChatGPT, que oferece acessibilidade visual para pessoas cegas ou com pouca visão. Através de um site intuitivo, o usuário poderá enviar imagens para serem processadas por inteligência artificial avançada, que gera descrições detalhadas dos elementos visuais, como cores, formas, objetos e contextos. Essa solução promove inclusão digital, ampliando o acesso à informação visual de forma eficiente e escalável.
 
 A descrição gerada será apresentada de duas formas:
 
 Texto Escrito: Uma versão detalhada da análise da imagem, disponível na tela do usuário.
+
 Áudio: A descrição será convertida em áudio, permitindo que o conteúdo seja ouvido por pessoas cegas, proporcionando uma experiência acessível e informativa.
+
 Com essa solução, o site oferece uma nova forma de suporte e acessibilidade, permitindo que pessoas com deficiência visual compreendam o conteúdo visual de imagens enviadas, eliminando barreiras e promovendo inclusão digital.
 
 # For To See All
 
-This project aims to create an accessible platform for blind or visually impaired individuals by integrating ChatGPT. Through the website, users can upload an image, which will be processed by AI. The system will then generate a detailed description of all visible elements in the image, analyzing colors, shapes, contexts, and objects present in the scene.
+This project aims to develop an innovative platform, integrated with ChatGPT, that provides visual accessibility for blind or visually impaired individuals. Through an intuitive website, users will be able to upload images, which will be processed by advanced artificial intelligence to generate detailed descriptions of visual elements such as colors, shapes, objects, and contexts. This solution promotes digital inclusion by expanding access to visual information in an efficient and scalable manner.
 
 The generated description will be presented in two formats:
 
-Written Text: A detailed version of the image analysis will be displayed on the user’s screen.
-Audio: The description will be converted into audio, allowing blind users to listen to the content, providing an accessible and informative experience.
-This solution offers a new form of support and accessibility, enabling visually impaired individuals to understand the visual content of uploaded images, breaking barriers and promoting digital inclusion.
+Written Text: A detailed version of the image analysis, available on the user's screen.
 
+Audio: The description will be converted into audio, allowing blind individuals to listen to the content, providing an accessible and informative experience.
+
+With this solution, the website offers a new form of support and accessibility, enabling visually impaired people to understand the visual content of uploaded images, breaking down barriers and promoting digital inclusion
 
 
 ## Referência
 
- - [Site](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Site](https://fortoseeall-a6f0c908bc1e.herokuapp.com/)
  - [Whatsapp](https://github.com/matiassingers/awesome-readme)
  - [Telegram](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
 
