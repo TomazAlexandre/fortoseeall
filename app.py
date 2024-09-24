@@ -1,12 +1,15 @@
 import openai
 from flask import Flask, render_template, request, jsonify
 from PIL import Image
+from flask_cors import CORS
 import base64
 import os
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
+CORS(app)
+
 
 # Rota principal para renderizar o frontend
 @app.route('/')
@@ -27,6 +30,7 @@ def analyze_image(image_bytes):
     )
     
     return response['choices'][0]['text']
+
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
