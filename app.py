@@ -1,13 +1,17 @@
 import openai
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from PIL import Image
-import io
 import base64
+import os
 
-# Defina sua chave de API OpenAI
-openai.api_key = ""
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
+
+# Rota principal para renderizar o frontend
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 def analyze_image(image_bytes):
     # Convertendo a imagem para base64
@@ -22,7 +26,6 @@ def analyze_image(image_bytes):
         response_format="json"
     )
     
-    # A resposta retorna a descrição da imagem
     return response['choices'][0]['text']
 
 @app.route('/upload', methods=['POST'])
