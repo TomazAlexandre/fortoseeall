@@ -1,32 +1,28 @@
 import openai
 from flask import Flask, request, jsonify
-from dotenv import load_dotenv
 from PIL import Image
-import base64
 import io
-import os
+import base64
 
-load_dotenv()
-
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Defina sua chave de API OpenAI
+openai.api_key = ""
 
 app = Flask(__name__)
 
 def analyze_image(image_bytes):
-    # Converte a imagem para base64
+    # Convertendo a imagem para base64
     img_base64 = base64.b64encode(image_bytes).decode("utf-8")
 
-    # Faz a requisição para o DALL·E ou API de análise da OpenAI
+    # Fazendo a requisição para o modelo de análise de imagem
     response = openai.Image.create(
-        model="dalle",
-        prompt="Analyze this image in detail.",
+        prompt="Describe this image in detail.",
+        image=img_base64,
         n=1,
         size="1024x1024",
-        response_format="json",
-        image=img_base64
+        response_format="json"
     )
-
-    # Retorna a descrição da imagem
+    
+    # A resposta retorna a descrição da imagem
     return response['choices'][0]['text']
 
 @app.route('/upload', methods=['POST'])
@@ -37,7 +33,7 @@ def upload_image():
     image = request.files['image']
     image_bytes = image.read()
 
-    # Faz a análise da imagem
+    # Chamando a função para analisar a imagem
     description = analyze_image(image_bytes)
 
     return jsonify({"description": description})
