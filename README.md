@@ -38,3 +38,14 @@ With this solution, the website offers a new form of support and accessibility, 
 
 ![Fluxo APP](/docs/assets/fluxo.png)
 
+## Proximas Etapas:
+
+Integração com whatsapp. Bastando ser enviado a imagem e o whatsapp ja retornara o audio descritivo da imagem.
+
+Integração com galeria do celular, um aplicativo onde ele carrega as imagens do celular e ao clicar em uma, um áudio descritivo é apresentado.
+
+## Next Steps:
+
+Integration with WhatsApp. Simply send the image and WhatsApp will return the audio description of the image.
+
+Integration with the cell phone gallery, an application that loads the images from the cell phone and when you click on one, an audio description is presented.
