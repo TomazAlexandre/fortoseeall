@@ -1,40 +1,37 @@
-document.getElementById('uploadForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
+document.getElementById('upload-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const formData = new FormData();
+    const imageInput = document.getElementById('image-input').files[0];
 
-    let formData = new FormData();
-    let imageFile = document.getElementById('imageInput').files[0];
-    formData.append("image", imageFile);
-
-    // Substitua pela URL correta do backend no Heroku
-    const herokuBackendUrl = 'https://fortoseeall-a6f0c908bc1e.herokuapp.com/upload';  // Substitua por sua URL
-
-    try {
-        const response = await fetch(herokuBackendUrl, {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            alert(`Erro: ${errorData.error}`);
-            return;
-        }
-
-        const result = await response.json();
-        const responseText = result.description;
-
-        // Exibir a resposta no frontend
-        document.getElementById('response').innerText = responseText;
-        document.getElementById('result').style.display = 'block';
-
-        // Adicionar funcionalidade para converter o texto em áudio
-        document.getElementById('playAudio').onclick = function () {
-            const speech = new SpeechSynthesisUtterance(responseText);
-            speech.lang = 'pt-BR'; // Define o idioma para Português do Brasil
-            window.speechSynthesis.speak(speech);
-        };
-    } catch (error) {
-        console.error('Erro ao enviar a imagem:', error);
-        alert('Ocorreu um erro ao enviar a imagem. Tente novamente.');
+    if (!imageInput) {
+        alert("Por favor, selecione uma imagem para upload.");
+        return;
     }
+
+    formData.append('image', imageInput);
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            // Mostrar a descrição gerada
+            const descriptionDiv = document.getElementById('description');
+            descriptionDiv.innerText = "Descrição: " + data.description;
+
+            // Configurar o player de áudio
+            const audioPlayer = document.getElementById('audio-player');
+            audioPlayer.src = data.audio_url;
+            audioPlayer.style.display = 'block';
+            audioPlayer.play();
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao processar a imagem:', error);
+    });
 });
