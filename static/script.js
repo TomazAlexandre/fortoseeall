@@ -11,6 +11,18 @@ document.getElementById('upload-form').addEventListener('submit', function(event
 
     formData.append('image', imageInput);
 
+    // Exibe mensagem de carregamento
+    const descriptionDiv = document.getElementById('description');
+    descriptionDiv.style.display = 'none';
+    descriptionDiv.innerText = "Analisando a imagem...";
+    descriptionDiv.style.display = 'block';
+
+    // Limpar o player de áudio
+    const audioPlayer = document.getElementById('audio-player');
+    audioPlayer.style.display = 'none';
+    audioPlayer.src = '';
+
+    // Enviar a imagem para a API
     fetch('/upload', {
         method: 'POST',
         body: formData,
@@ -18,20 +30,21 @@ document.getElementById('upload-form').addEventListener('submit', function(event
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            alert(data.error);
+            descriptionDiv.innerText = data.error;
         } else {
             // Mostrar a descrição gerada
-            const descriptionDiv = document.getElementById('description');
             descriptionDiv.innerText = "Descrição: " + data.description;
+            descriptionDiv.classList.remove('alert-info');
+            descriptionDiv.classList.add('alert-success');
 
             // Configurar o player de áudio
-            const audioPlayer = document.getElementById('audio-player');
             audioPlayer.src = data.audio_url;
             audioPlayer.style.display = 'block';
-            audioPlayer.play();
         }
     })
     .catch(error => {
-        console.error('Erro ao processar a imagem:', error);
+        descriptionDiv.innerText = "Erro ao processar a imagem: " + error;
+        descriptionDiv.classList.remove('alert-info');
+        descriptionDiv.classList.add('alert-danger');
     });
 });
