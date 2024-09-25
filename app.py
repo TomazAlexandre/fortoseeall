@@ -1,51 +1,55 @@
-import os
+from flask import Flask, request, jsonify, send_file
 import openai
-from flask import Flask, render_template, request, jsonify
-from flask_cors import CORS
-import base64
+from PIL import Image
+import io
+import os
+from gtts import gTTS
 
 app = Flask(__name__)
-CORS(app)  # Habilita CORS para permitir requisições do frontend
 
-# Carregar a chave da API do OpenAI a partir das variáveis de ambiente
+# Configurar a API Key da OpenAI
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 @app.route('/')
-def index():
-    return render_template('index.html')
-
-def analyze_image(image_bytes):
-    try:
-        # Converter a imagem para base64
-        img_base64 = base64.b64encode(image_bytes).decode("utf-8")
-        
-        # Enviar a imagem para a API de análise da OpenAI
-        # Nota: Certifique-se de que a API utilizada suporta análise de imagens
-        response = openai.Image.create(
-            prompt="Describe this image in detail.",
-            image=img_base64,
-            n=1,
-            size="1024x1024",
-            response_format="json"
-        )
-        # Retornar a descrição gerada
-        return response['choices'][0]['text']
-    except Exception as e:
-        print(f"Erro ao processar a imagem: {e}")
-        return "Desculpe, ocorreu um erro ao processar a imagem."
+def home():
+    return "API para análise de imagens e geração de áudio a partir da descrição. Use /upload para enviar uma imagem."
 
 @app.route('/upload', methods=['POST'])
-def upload_image():
+def analyze_image():
     if 'image' not in request.files:
-        return jsonify({"error": "Nenhum arquivo de imagem fornecido"}), 400
-
+        return jsonify({"error": "Nenhuma imagem foi enviada"}), 400
+    
+    # Obter a imagem do request
     image = request.files['image']
-    image_bytes = image.read()
+    img = Image.open(io.BytesIO(image.read()))
 
-    # Analisar a imagem
-    description = analyze_image(image_bytes)
+    # Aqui vamos gerar uma descrição genérica da imagem.
+    # Você pode substituir este bloco pela lógica real de análise da imagem com a OpenAI.
+    description = "Este é um exemplo de descrição gerada pela análise da imagem."
 
-    return jsonify({"description": description})
+    # Exemplo de uso da OpenAI API para gerar uma descrição (substitua a lógica conforme necessário):
+    # response = openai.Image.create_variation(
+    #     image=img,
+    #     n=1,
+    #     size="1024x1024"
+    # )
+    # description = response['data'][0]['text']
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    # Gerar áudio a partir da descrição usando gTTS
+    tts = gTTS(description, lang='pt')
+    audio_path = "description_audio.mp3"
+    tts.save(audio_path)
+
+    # Retornar a resposta com a descrição e o link para o áudio gerado
+    return jsonify({
+        "description": description,
+        "audio_url": request.host_url + 'audio'
+    })
+
+@app.route('/audio')
+def get_audio():
+    # Enviar o arquivo de áudio gerado
+    return send_file('description_audio.mp3', mimetype='audio/mpeg')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
