@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, render_template
 import openai
 from PIL import Image
 import io
@@ -12,7 +12,8 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 
 @app.route('/')
 def home():
-    return "API para análise de imagens e geração de áudio a partir da descrição. Use /upload para enviar uma imagem."
+    # Serve a página HTML do frontend
+    return render_template('index.html')
 
 @app.route('/upload', methods=['POST'])
 def analyze_image():
@@ -23,24 +24,15 @@ def analyze_image():
     image = request.files['image']
     img = Image.open(io.BytesIO(image.read()))
 
-    # Aqui vamos gerar uma descrição genérica da imagem.
-    # Você pode substituir este bloco pela lógica real de análise da imagem com a OpenAI.
+    # Gerar descrição da imagem (aqui, é um exemplo fixo, você pode substituir com a API da OpenAI)
     description = "Este é um exemplo de descrição gerada pela análise da imagem."
-
-    # Exemplo de uso da OpenAI API para gerar uma descrição (substitua a lógica conforme necessário):
-    # response = openai.Image.create_variation(
-    #     image=img,
-    #     n=1,
-    #     size="1024x1024"
-    # )
-    # description = response['data'][0]['text']
 
     # Gerar áudio a partir da descrição usando gTTS
     tts = gTTS(description, lang='pt')
     audio_path = "description_audio.mp3"
     tts.save(audio_path)
 
-    # Retornar a resposta com a descrição e o link para o áudio gerado
+    # Retornar a resposta com a descrição e link para o áudio gerado
     return jsonify({
         "description": description,
         "audio_url": request.host_url + 'audio'
