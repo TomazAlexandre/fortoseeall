@@ -5,6 +5,10 @@ import io
 import os
 from gtts import gTTS
 import pytesseract  # Biblioteca de OCR para extrair texto da imagem
+import pytesseract
+
+# Caminho para o executável do Tesseract no Heroku
+pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 
 app = Flask(__name__)
 
