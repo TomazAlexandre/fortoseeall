@@ -1,0 +1,81 @@
+/* Estilos personalizados */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.card {
+    max-width: 800px;
+    margin: 0 auto;
+    border: none;
+}
+
+.card-header {
+    background-color: #007bff;
+    border-bottom: none;
+}
+
+.card-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+}
+
+.upload-button {
+    background-color: #007bff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #0056b3;
+}
+
+#previewImage {
+    max-height: 300px;
+    width: auto;
+    margin: 20px auto; /* Adiciona margem para espaçamento */
+    border: 1px solid #ddd;
+    display: none; /* Inicialmente oculto */
+}
+
+#descriptionText {
+    font-size: 1.1rem;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.audio-section {
+    margin-top: 1.5rem;
+}
+
+audio {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    padding: 1rem 0;
+    margin-top: auto;
+}
+
+.footer .text-muted {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
