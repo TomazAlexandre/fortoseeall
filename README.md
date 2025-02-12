@@ -1,7 +1,7 @@
 
 # Para ver tudo
 
-Este projeto visa desenvolver uma plataforma inovadora, integrada ao ChatGPT, que oferece acessibilidade visual para pessoas cegas ou com pouca visão. Através de um site intuitivo, o usuário poderá enviar imagens para serem processadas por inteligência artificial avançada, que gera descrições detalhadas dos elementos visuais, como cores, formas, objetos e contextos. Essa solução promove inclusão digital, ampliando o acesso à informação visual de forma eficiente e escalável.
+Este projeto visa desenvolver uma plataforma inovadora, integrada ao Amazon Rekognition, que oferece acessibilidade visual para pessoas cegas ou com pouca visão. Através de um site intuitivo, o usuário poderá enviar imagens para serem processadas por inteligência artificial avançada, que gera descrições detalhadas dos elementos visuais, como cores, formas, objetos e contextos. Essa solução promove inclusão digital, ampliando o acesso à informação visual de forma eficiente e escalável.
 
 A descrição gerada será apresentada de duas formas:
 
@@ -13,7 +13,7 @@ Com essa solução, o site oferece uma nova forma de suporte e acessibilidade, p
 
 # For To See All
 
-This project aims to develop an innovative platform, integrated with ChatGPT, that provides visual accessibility for blind or visually impaired individuals. Through an intuitive website, users will be able to upload images, which will be processed by advanced artificial intelligence to generate detailed descriptions of visual elements such as colors, shapes, objects, and contexts. This solution promotes digital inclusion by expanding access to visual information in an efficient and scalable manner.
+This project aims to develop an innovative platform integrated with Amazon Rekognition, that provides visual accessibility for blind or visually impaired individuals. Through an intuitive website, users will be able to upload images, which will be processed by advanced artificial intelligence to generate detailed descriptions of visual elements such as colors, shapes, objects, and contexts. This solution promotes digital inclusion by expanding access to visual information in an efficient and scalable manner.
 
 The generated description will be presented in two formats:
 
@@ -22,7 +22,10 @@ Written Text: A detailed version of the image analysis, available on the user's 
 Audio: The description will be converted into audio, allowing blind individuals to listen to the content, providing an accessible and informative experience.
 
 With this solution, the website offers a new form of support and accessibility, enabling visually impaired people to understand the visual content of uploaded images, breaking down barriers and promoting digital inclusion
+## Exemplo Aplicação:
 
+
+![Fluxo APP](/docs/assets/exemplosite.png)
 
 ## Referência
 
