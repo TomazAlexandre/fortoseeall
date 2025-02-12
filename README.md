@@ -25,7 +25,7 @@ With this solution, the website offers a new form of support and accessibility, 
 ## Exemplo Aplicação:
 
 
-![Fluxo APP](/docs/assets/exemplosite.png)
+![Fluxo APP](/docs/assets/exemplosite.PNG)
 
 ## Referência
 
